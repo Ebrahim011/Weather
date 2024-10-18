@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="mainColor">#FF4c32a2</color>
+    <color name="light_backgroundColor">#2d2654</color>
+    <color name="dark_backgroundColor">#2d2654</color>
+    <color name="bottomSheetColor">#FF3a2c74</color>
 </resources>

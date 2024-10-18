@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginBottom="10dp"
+    android:layout_marginHorizontal="15dp"
+    android:layout_height="50dp">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:id="@+id/tv_city_recycler"
+    android:gravity="center"
+    android:textColor="@color/white"
+    android:text="City Name"
+    app:layout_constraintStart_toStartOf="parent"
+    android:textSize="20sp"/>
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:contentDescription="cityWeatherCondition"
+        android:id="@+id/iv_weather_condition"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="10dp"
+        android:id="@+id/tv_temperature"
+        android:gravity="center"
+        android:text="00"
+        android:textColor="@color/white"
+
+        app:layout_constraintEnd_toStartOf="@id/iv_weather_condition"
+        android:textSize="20sp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

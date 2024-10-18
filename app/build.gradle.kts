@@ -36,8 +36,8 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-}
 
+}
 
 dependencies {
 
@@ -65,9 +65,12 @@ dependencies {
     kapt(libs.androidx.lifecycle.compiler)
     implementation (libs.androidx.navigation.fragment.ktx)
     implementation (libs.androidx.navigation.ui.ktx)
+    implementation ("com.google.android.material:material:1.9.0")
     implementation (libs.kotlinx.coroutines.android)
     val room_version = "2.6.1"
     kapt("androidx.room:room-compiler:$room_version")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.2")
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.7.2")
+    implementation("com.airbnb.android:lottie:4.2.2")
+    implementation ("com.google.android.gms:play-services-location:21.3.0")
 }
