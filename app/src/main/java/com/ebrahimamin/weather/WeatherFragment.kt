@@ -1,6 +1,7 @@
 // app/src/main/java/com/ebrahimamin/weather/WeatherFragment.kt
 package com.ebrahimamin.weather
 
+import DailyAdapter
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +13,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ebrahimamin.weather.api_files.APIs
 import com.ebrahimamin.weather.api_files.WeatherResponse
@@ -24,10 +27,10 @@ class WeatherFragment : Fragment() {
     lateinit var degreeTextView: TextView
     lateinit var weatherIconImageView: ImageView
     lateinit var tosearchFragment: ImageButton
+    lateinit var hourlyRecyclerView: RecyclerView
     private lateinit var apiService: APIs
-
+    lateinit var dailyRecyclerView: RecyclerView
     override fun onCreateView(
-
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
@@ -40,6 +43,9 @@ class WeatherFragment : Fragment() {
         degreeTextView = view.findViewById(R.id.temperature)
         weatherIconImageView = view.findViewById(R.id.weatherIcon)
         tosearchFragment = view.findViewById(R.id.toSearchFragment)
+        hourlyRecyclerView = view.findViewById(R.id.hourlyRecyclerView)
+        hourlyRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.weatherapi.com/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -59,7 +65,7 @@ class WeatherFragment : Fragment() {
             val (latitude, longitude) = location
             val locationString = "$latitude,$longitude"
             lifecycleScope.launch {
-                val response = apiService.getWeather(locationString, "1")
+                val response = apiService.getWeather(locationString, "5")
                 if (response.isSuccessful) {
                     val weatherResponse = response.body()
                     weatherResponse?.let {
@@ -79,5 +85,15 @@ class WeatherFragment : Fragment() {
         Glide.with(this)
             .load("https:${weatherResponse.current.condition.icon}")
             .into(weatherIconImageView)
+
+        // Set up the hourly forecast RecyclerView
+        val hourlyAdapter = HourlyAdapter(weatherResponse.forecast.forecastday[0].hour)
+        hourlyRecyclerView.adapter = hourlyAdapter
+
+        // Set up the daily forecast RecyclerView
+        dailyRecyclerView = view?.findViewById(R.id.dailyRecyclerView) ?: return
+        val dailyAdapter = DailyAdapter(weatherResponse.forecast.forecastday)
+        dailyRecyclerView.adapter = dailyAdapter
+        dailyRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     }
 }

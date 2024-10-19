@@ -23,6 +23,7 @@
             android:layout_gravity="center"
             android:text="Location"
             android:textColor="@color/white"
+
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,10 +49,16 @@
         app:layout_constraintStart_toStartOf="parent"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_marginBottom="150dp"
+            android:id="@+id/layout1"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            >
 
             <TextView
                 android:id="@+id/temperature"
@@ -84,7 +91,7 @@
                 android:id="@+id/weatherIcon"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-
+                android:src="@drawable/baseline_nights_stay_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/temperature"
@@ -92,8 +99,34 @@
                 app:layout_constraintTop_toTopOf="parent"
 
                  />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/hourlyRecyclerView"
+                android:layout_width="match_parent"
+                android:background="@drawable/widgets_background"
+                android:layout_marginHorizontal="10dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginTop="100dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/layout1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dailyRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                android:background="@drawable/widgets_background"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hourlyRecyclerView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

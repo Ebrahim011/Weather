@@ -16,6 +16,6 @@ interface APIs {
     suspend fun getWeather(
         @Query("q") location: String, // Latitude and Longitude (Decimal degree) e.g: q=48.8567,2.3508
         @Query("days") days: String,
-        @Query("key") key: String = "4c95c5911cfd4d4ba27201700242509"
+        @Query("key") key: String = "1931d62d36bf49619d8184047241810"
     ): Response<WeatherResponse>
 }

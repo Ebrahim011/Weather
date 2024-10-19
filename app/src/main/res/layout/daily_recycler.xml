@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:weightSum="4"
+    android:layout_width="match_parent"
+    android:padding="5dp"
+    android:gravity="center"
+    android:layout_height="wrap_content"
+    >
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:id="@+id/dayinweekTV"
+        android:padding="3dp"
+        android:layout_weight="1"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:text="Friday" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="3dp"
+        android:textSize="20sp"
+        android:layout_weight="1"
+        android:id="@+id/dateTV"
+        android:gravity="center"
+
+        android:textColor="@color/white"
+        android:text="30 Oct" />
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:src="@drawable/baseline_nights_stay_24"
+        android:id="@+id/dayConidiionIV"
+        android:padding="3dp"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="3dp"
+        android:textColor="@color/white"
+        android:id="@+id/maxandmin_dayTemperatureTV"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_weight="1"
+
+        android:text="15°/35°" />
+
+
+
+</LinearLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:weightSum="3"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_marginHorizontal="5dp"
+    android:layout_gravity="center"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="00:00"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:padding="5dp"
+        android:gravity="center"
+        android:id="@+id/hourTV"
+        android:layout_weight="1"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_marginVertical="10dp"
+        android:src="@drawable/baseline_nights_stay_24"
+        android:id="@+id/conditionIV"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:text="00°"
+        android:gravity="center"
+        android:id="@+id/temperatureTV"
+        android:layout_weight="1"/>
+
+</LinearLayout>
