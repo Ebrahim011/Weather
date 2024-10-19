@@ -23,6 +23,7 @@ object CurrentLocation {
     }
 
     fun getLocation(): Pair<Double, Double>? {
+
         val latitude = sharedPreferences.getString(KEY_LATITUDE, null)?.toDoubleOrNull()
         val longitude = sharedPreferences.getString(KEY_LONGITUDE, null)?.toDoubleOrNull()
         return if (latitude != null && longitude != null) {

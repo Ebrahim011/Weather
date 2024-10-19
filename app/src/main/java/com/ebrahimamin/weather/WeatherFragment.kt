@@ -1,4 +1,3 @@
-// app/src/main/java/com/ebrahimamin/weather/WeatherFragment.kt
 package com.ebrahimamin.weather
 
 import DailyAdapter
@@ -30,6 +29,11 @@ class WeatherFragment : Fragment() {
     lateinit var hourlyRecyclerView: RecyclerView
     private lateinit var apiService: APIs
     lateinit var dailyRecyclerView: RecyclerView
+    lateinit var windSpeedTextView: TextView  // Renamed for clarity
+    lateinit var windDirectionTextView: TextView  // Added TextView for wind direction
+    lateinit var humidityTextView: TextView  // Added TextView for current humidity
+    lateinit var avgHumidityTextView: TextView  // Added TextView for average humidity
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,9 +49,13 @@ class WeatherFragment : Fragment() {
         tosearchFragment = view.findViewById(R.id.toSearchFragment)
         hourlyRecyclerView = view.findViewById(R.id.hourlyRecyclerView)
         hourlyRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        windSpeedTextView = view.findViewById(R.id.windSpeedtv)  // Initialize wind speed TextView
+        windDirectionTextView = view.findViewById(R.id.windDirectiontv)  // Initialize wind direction TextView
+        humidityTextView = view.findViewById(R.id.humiditytv)  // Initialize current humidity TextView
+        avgHumidityTextView = view.findViewById(R.id.humidityAvg)  // Initialize average humidity TextView
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.weatherapi.com/")
+            .baseUrl("https://api.weatherapi.com/v1/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -86,6 +94,20 @@ class WeatherFragment : Fragment() {
             .load("https:${weatherResponse.current.condition.icon}")
             .into(weatherIconImageView)
 
+        // Display wind data
+        windSpeedTextView.text = "Speed: ${weatherResponse.current.wind_kph} km/h"
+        windDirectionTextView.text = "Direction: ${weatherResponse.current.wind_dir}"
+
+        // Display humidity data
+        humidityTextView.text = "Humidity: ${weatherResponse.current.humidity}%"
+        avgHumidityTextView.text = "Avg Humidity: ${weatherResponse.forecast.forecastday[0].day.avghumidity}%"
+
+        // Show notification with city name and temperature
+        val notificationHelper = NotificationHelper(requireContext())
+        notificationHelper.showNotification(
+            weatherResponse.location.name, // The name of the city (weather location)
+            weatherResponse.current.temp_c.toString() // The current temperature in Celsius
+        )
         // Set up the hourly forecast RecyclerView
         val hourlyAdapter = HourlyAdapter(weatherResponse.forecast.forecastday[0].hour)
         hourlyRecyclerView.adapter = hourlyAdapter

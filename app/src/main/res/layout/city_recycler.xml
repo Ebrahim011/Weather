@@ -19,6 +19,7 @@
         android:layout_width="70dp"
         android:layout_height="40dp"
         app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="fitEnd"
         app:layout_constraintBottom_toBottomOf="parent"
         android:contentDescription="cityWeatherCondition"
         android:id="@+id/iv_weather_condition"

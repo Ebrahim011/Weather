@@ -62,7 +62,6 @@ val topCities = listOf(
     Location("24.0889,32.8998", "Aswan"),                // Aswan, Egypt
     Location("30.8138,31.0625", "Damanhur"),             // Damanhur, Egypt
     Location("30.8307,30.9903", "Kafr El Sheikh"),       // Kafr El Sheikh, Egypt
-    Location("30.1337,31.2422", "Qalyub"),               // Qalyub, Egypt
     Location("27.1333,31.2333", "New Valley"),           // New Valley, Egypt
     Location("30.8232,31.3562", "Menouf"),               // Menouf, Egypt
     Location("30.4068,31.1686", "Qalyubia"),             // Qalyubia, Egypt
