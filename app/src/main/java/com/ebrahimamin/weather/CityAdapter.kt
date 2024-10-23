@@ -1,6 +1,7 @@
 // app/src/main/java/com/ebrahimamin/weather/CityAdapter.kt
 package com.ebrahimamin.weather
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class CityAdapter(private var cities: MutableList<Location>) :
+class CityAdapter(private var cities: MutableList<Location>, private val onItemClick: (Location) -> Unit) :
     RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
 
     private val loadedItems = mutableSetOf<Int>()
@@ -41,10 +42,7 @@ class CityAdapter(private var cities: MutableList<Location>) :
         }
     }
 
-    override fun onViewDetachedFromWindow(holder: CityViewHolder) {
-        super.onViewDetachedFromWindow(holder)
-        // Optionally, you can cancel ongoing requests here if needed
-    }
+
 
     private fun removeItem(position: Int) {
         cities.removeAt(position)
@@ -55,6 +53,13 @@ class CityAdapter(private var cities: MutableList<Location>) :
         private val cityNameTextView: TextView = itemView.findViewById(R.id.tv_city_recycler)
         private val temperatureTextView: TextView = itemView.findViewById(R.id.tv_temperature)
         private val weatherIconImageView: ImageView = itemView.findViewById(R.id.iv_weather_condition)
+
+        init {
+            itemView.setOnClickListener {
+                val city = cities[adapterPosition]
+                onItemClick(city)
+            }
+        }
 
         fun bind(city: Location) {
             cityNameTextView.text = city.cityName
@@ -86,6 +91,7 @@ class CityAdapter(private var cities: MutableList<Location>) :
             }
         }
 
+        @SuppressLint("SetTextI18n")
         private fun updateUI(weatherResponse: WeatherResponse) {
             temperatureTextView.text = "${weatherResponse.current.temp_c}°C"
             Glide.with(itemView.context)

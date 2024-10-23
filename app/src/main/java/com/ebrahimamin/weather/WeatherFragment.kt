@@ -2,6 +2,7 @@ package com.ebrahimamin.weather
 
 import DailyAdapter
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.ebrahimamin.weather.activities.MainActivity
 import com.ebrahimamin.weather.api_files.APIs
 import com.ebrahimamin.weather.api_files.WeatherResponse
 import kotlinx.coroutines.launch
@@ -33,6 +35,7 @@ class WeatherFragment : Fragment() {
     lateinit var windDirectionTextView: TextView  // Added TextView for wind direction
     lateinit var humidityTextView: TextView  // Added TextView for current humidity
     lateinit var avgHumidityTextView: TextView  // Added TextView for average humidity
+    lateinit var cityByGPS:ImageButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +56,12 @@ class WeatherFragment : Fragment() {
         windDirectionTextView = view.findViewById(R.id.windDirectiontv)  // Initialize wind direction TextView
         humidityTextView = view.findViewById(R.id.humiditytv)  // Initialize current humidity TextView
         avgHumidityTextView = view.findViewById(R.id.humidityAvg)  // Initialize average humidity TextView
+        cityByGPS = view.findViewById(R.id.byLocation)
+
+        cityByGPS.setOnClickListener {
+            val intent = Intent(requireActivity(), MainActivity::class.java)
+            startActivity(intent)
+        }
 
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.weatherapi.com/v1/")

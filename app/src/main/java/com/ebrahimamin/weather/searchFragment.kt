@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -34,7 +33,7 @@ class searchFragment : Fragment() {
     private val weatherData = mutableMapOf<String, WeatherResponse>()
     private lateinit var apiService: APIs
     private var searchJob: Job? = null
-    lateinit var backButton: ImageView
+    private lateinit var backButton: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,8 +51,14 @@ class searchFragment : Fragment() {
         searchCityEditText = view.findViewById(R.id.searchCity)
         recyclerView = view.findViewById(R.id.recyclerRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        cityAdapter = CityAdapter(topCities.toMutableList())
-        backButton=view.findViewById(R.id.backButton)
+        cityAdapter = CityAdapter(topCities.toMutableList()) { location ->
+            val coordinates = location.location.split(",")
+            val latitude = coordinates[0].toDouble()
+            val longitude = coordinates[1].toDouble()
+            CurrentLocation.saveLocation(latitude, longitude)
+            findNavController().popBackStack()
+        }
+        backButton = view.findViewById(R.id.backButton)
         backButton.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -85,7 +90,7 @@ class searchFragment : Fragment() {
     }
 
     private fun filterCities(query: String) {
-        val filteredCities = topCities.filter { it.cityName.equals(query, ignoreCase = true) }
+        val filteredCities = topCities.filter { it.cityName.contains(query, ignoreCase = true) }
         fetchWeatherData(filteredCities)
     }
 
@@ -99,7 +104,13 @@ class searchFragment : Fragment() {
                     }
                 }
             }
-            cityAdapter = CityAdapter(cities.toMutableList())
+            cityAdapter = CityAdapter(cities.toMutableList()) { location ->
+                val coordinates = location.location.split(",")
+                val latitude = coordinates[0].toDouble()
+                val longitude = coordinates[1].toDouble()
+                CurrentLocation.saveLocation(latitude, longitude)
+                findNavController().popBackStack()
+            }
             recyclerView.adapter = cityAdapter
         }
     }

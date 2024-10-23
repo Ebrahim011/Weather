@@ -38,9 +38,19 @@
             android:layout_gravity="end|center"
             android:src="@drawable/baseline_add_24"
             android:background="#00000000" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="30dp"
+            android:paddingHorizontal="10dp"
+            android:id="@+id/byLocation"
+            android:scaleType="center"
+            android:layout_gravity="start|center"
+            android:src="@drawable/baseline_location_on_24"
+            android:background="#00000000" />
     </androidx.appcompat.widget.Toolbar>
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
@@ -51,6 +61,7 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            android:layout_marginTop="30dp"
             android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -110,7 +121,7 @@
                 android:layout_marginHorizontal="10dp"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="70dp"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@id/layout1"
                 app:layout_constraintStart_toStartOf="parent"
@@ -189,6 +200,7 @@
                            app:layout_constraintBottom_toBottomOf="parent"
                            app:layout_constraintEnd_toEndOf="parent"
                            app:lottie_autoPlay="true"
+                           app:lottie_speed="1.5"
                            app:lottie_loop="true"
                            app:lottie_rawRes="@raw/wind_anim" />
 
@@ -209,7 +221,7 @@
                            android:padding="8dp"
                            android:id="@+id/humiditytvtop"
                            app:layout_constraintBottom_toTopOf="@id/humiditytv"
-                           android:text="Hhumidity"
+                           android:text="Humidity"
                            android:textColor="@color/white"
                            android:textSize="20sp"/>
                        <TextView
@@ -256,5 +268,6 @@
                </LinearLayout>
                </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
